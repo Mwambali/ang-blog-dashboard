@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'; // Import NgForm type
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -9,11 +9,18 @@ import { NgForm } from '@angular/forms'; // Import NgForm type
 export class CategoriesComponent implements OnInit {
   formData: any;
 
-  constructor() { }
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit(): void { }
 
   onSubmit(formData: NgForm) { // Explicitly specify the type as NgForm
-    console.log(formData.value); // Use formData.value to get the form values
+    let categoryData = {
+      category: formData.value.category
+    }
+    this.afs.collection('categories').add(categoryData).then(docRef => {
+      console.log(docRef);
+    })
+      .catch(err => console.log(err))
   }
+
 }
