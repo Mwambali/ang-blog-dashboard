@@ -11,7 +11,9 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private afs: AngularFirestore) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
 
   onSubmit(formData: NgForm) { // Explicitly specify the type as NgForm
     let categoryData = {
